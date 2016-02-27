@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+    
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            android:hint="账号"
+            android:textColorHint="#99ffffff"
+            android:drawableLeft="@drawable/login_icon_account"
+            android:drawablePadding="25dp"
+            android:paddingLeft="16dp"
+            android:inputType="number"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            android:hint="密码"
+            android:textColorHint="#99ffffff"
+            android:drawableLeft="@drawable/login_icon_password"
+            android:drawablePadding="25dip"
+            android:paddingLeft="16dp"
+            android:inputType="textPassword"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="登录"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/flat_btn_bg"
+        android:layout_margin="8dp"/>
+
+</LinearLayout>

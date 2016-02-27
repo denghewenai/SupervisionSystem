@@ -1,0 +1,46 @@
+<resources>
+        <!--图片预加载，避免需要先显示主题的背景造成卡顿感-->
+         <style name="WelcomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+             <item name="android:background">@drawable/welcome_bg</item>
+         </style>
+
+        <style name="ToolbarTransparent" parent="Base.Theme">
+            <item name="colorPrimary">#00000000</item>
+            <item name="colorPrimaryDark">@color/material_blue_500</item>
+        </style>
+
+        <style name="AppTheme" parent="Base.Theme">
+        </style>
+
+        <style name="Base.Theme" parent="Theme.AppCompat.Light.NoActionBar">
+            <!-- Customize your theme here. -->
+
+            <item name="android:windowBackground">@color/material_blue_100</item>
+
+            <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
+
+            <item name="colorPrimary">@color/material_blue_500</item>
+
+            <item name="colorPrimaryDark">@color/material_blue_700</item>
+
+            <item name="colorAccent">@color/material_pink_200</item>
+
+            <item name="colorControlNormal">#ffffff</item>
+
+        </style>
+
+        <style name="MySearchView" parent="Widget.AppCompat.SearchView"/>
+
+        <style name="AppTheme.DrawerArrowToggle" parent="Base.Widget.AppCompat.DrawerArrowToggle">
+
+            <item name="color">@android:color/white</item>
+        </style>
+
+        <style name="MyToobar" parent="ThemeOverlay.AppCompat.Light">
+
+            <item name="android:title">App Title</item>
+
+        </style>
+
+
+</resources>

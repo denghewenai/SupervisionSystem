@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.design.widget.TextInputLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/id_inputLayout_withIcon"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        >
+
+        <EditText
+            android:id="@+id/id_editText_withIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:paddingLeft="16dp"
+            android:paddingBottom="8dp"
+            android:inputType="none"
+            android:editable="false"
+            android:drawableEnd="@drawable/icon_edittext_drop"
+            android:drawableRight="@drawable/icon_edittext_drop"
+            android:textColorHint="#99ffffff"/>
+
+    </android.support.design.widget.TextInputLayout>

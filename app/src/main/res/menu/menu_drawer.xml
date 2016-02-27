@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/nav_home"
+            android:icon="@drawable/icon_nav_home"
+            android:title="主页"/>
+
+        <item android:id="@+id/nav_collection"
+            android:icon="@drawable/icon_nav_news"
+            android:title="校内新闻"/>
+
+        <item android:id="@+id/nav_add"
+            android:icon="@drawable/icon_nav_query"
+            android:title="成绩查询"/>
+
+    </group>
+
+    <item android:title="其他">
+
+        <menu>
+            <item
+                android:icon="@drawable/icon_nav_set"
+                android:title="设置"/>
+
+            <item
+                android:icon="@drawable/icon_nav_help"
+                android:title="帮助"/>
+
+        </menu>
+
+    </item>
+
+</menu>
