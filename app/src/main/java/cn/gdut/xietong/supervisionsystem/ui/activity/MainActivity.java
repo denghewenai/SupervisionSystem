@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity {
 
     private static final int HELP_CLOSE_DRAWER = 0x100;
     private static final int HEAD_CLOSE_DRAWER = 0x101;
+    private static final int SET_CLOSE_DRAWER =0x102 ;
 
     private Handler mHandler = new Handler(){
 
@@ -46,6 +47,8 @@ public class MainActivity extends BaseActivity {
                 startAnimActivity(HelpActivity.class);
             }else if(msg.what == HEAD_CLOSE_DRAWER){
                 startAnimActivity(UserInfoAcrtivity.class);
+            }else if(msg.what == SET_CLOSE_DRAWER){
+                startAnimActivity(SetActivity.class);
             }
         }
     };
@@ -90,6 +93,7 @@ public class MainActivity extends BaseActivity {
     public void initEvent() {
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 String title = (String) menuItem.getTitle();
@@ -118,7 +122,10 @@ public class MainActivity extends BaseActivity {
                         swichContent(nowFragment, queryFragment);
                         break;
                     case "帮助":
-                        mHandler.sendEmptyMessageDelayed(HELP_CLOSE_DRAWER,300);
+                        mHandler.sendEmptyMessageDelayed(HELP_CLOSE_DRAWER, 300);
+                        break;
+                    case "设置":
+                        mHandler.sendEmptyMessageDelayed(SET_CLOSE_DRAWER,300);
                         break;
                 }
 

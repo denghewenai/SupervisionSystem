@@ -29,6 +29,7 @@
             android:theme="@style/ToolbarTransparent"/>
         <activity android:name=".ui.activity.SetActivity"/>
         <activity android:name=".ui.activity.HelpActivity"/>
+        <activity android:name=".ui.activity.SetNtfActivity"/>
 
     </application>
 

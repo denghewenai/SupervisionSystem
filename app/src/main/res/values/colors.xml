@@ -11,4 +11,10 @@
 
     <color name="material_pink_200">#ff4081</color>
 
+    <!-- transparent为全透明，林思旭 2016.1.21 -->
+    <color name="white">#ffffff</color>
+
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
 </resources>

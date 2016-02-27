@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="50dp" android:padding="10dp">
+
+    <!-- 林思旭 2016.1.21   设置界面的Item-->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/imageView_ListItem"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txt_functionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:padding="2dp"
+            android:text="通知界面"/>
+        <TextView
+            android:id="@+id/txt_promptContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:text="温馨提示"/>
+    </LinearLayout>
+
+</LinearLayout>
