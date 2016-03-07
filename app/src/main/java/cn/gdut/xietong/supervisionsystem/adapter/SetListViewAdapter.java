@@ -32,7 +32,7 @@ public class SetListViewAdapter extends ArrayAdapter<SetContent>{
     public View getView(int position, View convertView, ViewGroup parent) {
         SetContent mycontent = getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-        if(position==0 || position == 4 || position == 9){
+        if(position==0 || position == 4 || position >= 9){  //2.28  林思旭修改间隔去适配不同大小屏幕，将==变成 >=
             View view_padding = LayoutInflater.from(getContext()).inflate(resourceId_padding,null);
             Log.i(TAG,"间隔");
             return view_padding;
