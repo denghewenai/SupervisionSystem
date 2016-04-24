@@ -3,7 +3,7 @@ package cn.gdut.xietong.supervisionsystem.app;
 import android.app.Application;
 
 /**
- * Created by Administrator on 2016/1/18.
+ * Created by mr.deng on 2016/1/18.
  */
 public class App extends Application {
 
@@ -15,7 +15,8 @@ public class App extends Application {
         instance = this;
     }
 
-    public static App getInstance() {
+    public static synchronized App getInstance() {
         return instance;
     }
+
 }

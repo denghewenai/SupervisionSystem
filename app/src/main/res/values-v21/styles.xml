@@ -3,7 +3,7 @@
 
     <style name="AppTheme" parent="Base.Theme">
 
-        <item name="android:windowBackground">@color/material_blue_100</item>
+        <item name="android:windowBackground">@color/white</item>
 
         <item name="android:searchViewStyle">@style/MySearchView</item>
 

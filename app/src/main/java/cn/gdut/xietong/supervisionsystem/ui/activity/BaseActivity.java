@@ -17,10 +17,10 @@ import cn.gdut.xietong.supervisionsystem.app.App;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    public App mApplication;
-    public LayoutInflater mInflater;
-    public ActionBar mActionBar;
-    public Toolbar mToolbar;
+     App mApplication;
+     LayoutInflater mInflater;
+     ActionBar mActionBar;
+     Toolbar mToolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         mApplication = App.getInstance();
         mInflater = LayoutInflater.from(this);
         mToolbar = (Toolbar) findViewById(R.id.id_toolbar);
-        showLog(mToolbar+"  "+getComponentName());
 
         if(mToolbar != null) {
             setSupportActionBar(mToolbar);
@@ -86,5 +85,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toast.makeText(BaseActivity.this, info, Toast.LENGTH_SHORT).show();
     }
 
+    public void showToast(int resId){
+        Toast.makeText(BaseActivity.this,resId,Toast.LENGTH_SHORT).show();
+    }
 
 }

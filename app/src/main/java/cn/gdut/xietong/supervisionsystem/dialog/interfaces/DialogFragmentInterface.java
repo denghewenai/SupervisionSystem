@@ -28,10 +28,6 @@ public interface DialogFragmentInterface {
 
     int show(FragmentTransaction transaction, String tag);
 
-    void dismiss();
-
-    void dismissAllowingStateLoss();
-
     Dialog getDialog();
 
     DialogFragmentInterface setExtra(Bundle extra);

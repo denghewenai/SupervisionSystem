@@ -19,6 +19,7 @@ import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentCallbac
 import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentCallbackProvider;
 import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentInterface;
 import cn.gdut.xietong.supervisionsystem.dialog.interfaces.SimpleDialogFragmentCallback;
+import cn.gdut.xietong.supervisionsystem.dialog.view.LinkagePicker;
 import cn.gdut.xietong.supervisionsystem.dialog.view.StringPicker;
 import cn.gdut.xietong.supervisionsystem.model.InputBean;
 import cn.gdut.xietong.supervisionsystem.utils.DialogManager;
@@ -208,6 +209,12 @@ public class GeneralFragment extends BaseFragment implements View.OnClickListene
                 String[] items = extra.getStringArray("items");
                 mTableRow4.setText(items[position]);
             }
+
+            @Override
+            public void onResultSet(DialogFragmentInterface dialog, LinkagePicker linkagePicker, String value) {
+                mTableRow3.setText(value);
+
+            }
         };
     }
 
@@ -231,6 +238,22 @@ public class GeneralFragment extends BaseFragment implements View.OnClickListene
                 mDialogManager.showStringPickerDialog(this, getChildFragmentManager(), Config.SECTION,2);
                 break;
             case R.id.id_row3:
+                mDialogManager.showLinkagePickerDialog(this,getChildFragmentManager(),Config.SCHOOL,
+                        Config.TEACHGING_BUILDING,Config.CLASSROOM);
+                if(TextUtils.isEmpty(mTableRow0.getText())){
+                    showToast(R.string.toast_fristchooseschool);
+                }else{
+                    switch (mTableRow0.getText().toString()){
+                        case "大学城":
+                            break;
+                        case "龙洞":
+                            break;
+                        case "东风路":
+                            break;
+                        case "商学院":
+                            break;
+                    }
+                }
                 break;
             case R.id.id_row4:
                 mDialogManager.showSingleChoiceDialog(this, getChildFragmentManager());

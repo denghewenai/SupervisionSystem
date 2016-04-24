@@ -22,6 +22,7 @@ import android.widget.ListAdapter;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
+import cn.gdut.xietong.supervisionsystem.dialog.view.LinkagePicker;
 import cn.gdut.xietong.supervisionsystem.dialog.view.StringPicker;
 
 
@@ -110,5 +111,10 @@ public class SimpleDialogFragmentCallback implements DialogFragmentCallback {
     @Override
     public void onStringSet(DialogFragmentInterface dialog, StringPicker stringPicker, String value){
         throw new RuntimeException("StringPickerDialogFragment has instantiated, but #onStringSet has not implemented.");
+    }
+
+    @Override
+    public void onResultSet(DialogFragmentInterface dialog, LinkagePicker linkagePicker, String value) {
+        throw new RuntimeException("LinkageDialogFragment has instantiated, but #onStringSet has not implemented.");
     }
 }

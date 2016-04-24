@@ -22,6 +22,7 @@ import android.widget.ListAdapter;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
+import cn.gdut.xietong.supervisionsystem.dialog.view.LinkagePicker;
 import cn.gdut.xietong.supervisionsystem.dialog.view.StringPicker;
 
 public interface DialogFragmentCallback {
@@ -178,5 +179,7 @@ public interface DialogFragmentCallback {
      * @param value The value that was set.
      */
     void onStringSet(DialogFragmentInterface dialog, StringPicker stringPicker, String value);
+
+    void onResultSet(DialogFragmentInterface dialog, LinkagePicker linkagePicker, String value);
 
 }
