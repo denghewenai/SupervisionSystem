@@ -18,7 +18,7 @@ import android.widget.ImageView;
 
 import cn.gdut.xietong.supervisionsystem.R;
 import cn.gdut.xietong.supervisionsystem.ui.fragment.HomeFragment;
-import cn.gdut.xietong.supervisionsystem.ui.fragment.NewsFragment;
+import cn.gdut.xietong.supervisionsystem.ui.fragment.DuDaoGuanLiFragment;
 import cn.gdut.xietong.supervisionsystem.ui.fragment.QueryFragment;
 
 public class MainActivity extends BaseActivity {
@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity {
     private ActionBarDrawerToggle mToggle;
 
     private HomeFragment homeFragment;
-    private NewsFragment newsFragment;
+    private DuDaoGuanLiFragment newsFragment;
     private QueryFragment queryFragment;
 
     private Fragment nowFragment;
@@ -107,10 +107,10 @@ public class MainActivity extends BaseActivity {
                         }
                         swichContent(nowFragment, homeFragment);
                         break;
-                    case "校内新闻":
+                    case "预约管理":
                         restoreTitle(title);
                         if (newsFragment == null) {
-                            newsFragment = new NewsFragment();
+                            newsFragment = new DuDaoGuanLiFragment();
                         }
                         swichContent(nowFragment, newsFragment);
                         break;
