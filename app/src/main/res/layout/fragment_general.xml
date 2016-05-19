@@ -19,30 +19,13 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row0"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
-                    android:hint="校区  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    style="@style/MyEditText"
+                    android:hint="校区  *必填" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -52,29 +35,14 @@
 
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="日期  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -83,29 +51,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="节次  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -113,29 +66,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="上课地点  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -144,29 +82,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="老师是否按时情况 *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -176,24 +99,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    style="@style/myEditTextNoIcon"
                     android:hint="学院名称  *必填"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -201,24 +114,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    style="@style/myEditTextNoIcon"
                     android:hint="教师名字  *必填"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -226,24 +129,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    style="@style/myEditTextNoIcon"
                     android:hint="教学班组成  *必填"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -251,29 +144,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row11"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="应到人数  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -281,29 +159,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row12"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="实际人数  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -312,29 +175,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row13"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="迟到早退情况(填人数)  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -343,29 +191,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row14"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="旷课情况(填人数)  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -374,29 +207,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row15"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="请假情况(填人数)  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -404,29 +222,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row16"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="玩手机情况(填人数)  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -435,29 +238,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row17"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="吃东西情况(填人数)  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -465,29 +253,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row18"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:inputType="none"
+                    style="@style/MyEditText"
                     android:hint="睡觉、讲话情况(填人数)  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -495,29 +268,15 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row19"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
+                    style="@style/MyEditText"
                     android:inputType="none"
                     android:hint="穿拖鞋、短裤情况(填人数)  *必填"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:drawableEnd="@drawable/icon_edittext_drop"
-                    android:drawableRight="@drawable/icon_edittext_drop"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
         </TableRow>
@@ -525,24 +284,14 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    style="@style/myEditTextNoIcon"
                     android:hint="督导时间  可选"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:textColorHint="#99ffffff"/>
+                 />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -551,25 +300,15 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    style="@style/myEditTextNoIcon"
                     android:hint="其他情况  可选"
                     android:singleLine="false"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -578,25 +317,15 @@
         <TableRow>
             <android.support.design.widget.TextInputLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                style="@style/MyTextInputLayout"
                 >
 
                 <EditText
                     android:id="@+id/id_row10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    style="@style/myEditTextNoIcon"
                     android:hint="督导员签名  *必填"
                     android:inputType="number"
-                    android:paddingTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingBottom="8dp"
-                    android:textColorHint="#99ffffff"/>
+                    />
 
             </android.support.design.widget.TextInputLayout>
 

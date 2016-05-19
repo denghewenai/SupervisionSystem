@@ -7,7 +7,7 @@ import android.os.Handler;
 import cn.gdut.xietong.supervisionsystem.R;
 
 /**
- * Created by Administrator on 2016/2/6.
+ * Created by Administrator on 2016/2/6
  */
 public class WelcomeActivity extends BaseActivity{
 

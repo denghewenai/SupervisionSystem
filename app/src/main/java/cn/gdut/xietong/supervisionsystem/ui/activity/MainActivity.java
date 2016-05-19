@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity {
                         }
                         swichContent(nowFragment, newsFragment);
                         break;
-                    case "成绩查询":
+                    case "预约查询":
                         restoreTitle(title);
                         if (queryFragment == null) {
                             queryFragment = new QueryFragment();

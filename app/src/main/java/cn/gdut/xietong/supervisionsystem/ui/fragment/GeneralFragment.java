@@ -256,7 +256,7 @@ public class GeneralFragment extends BaseFragment implements View.OnClickListene
                 }
                 break;
             case R.id.id_row4:
-                mDialogManager.showSingleChoiceDialog(this, getChildFragmentManager());
+                mDialogManager.showSingleChoiceDialog(this, getChildFragmentManager(),new String[]{"是","否"},"老师是否按时上课");
                 break;
             case R.id.id_row5:
                 break;

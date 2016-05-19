@@ -1,6 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:carc_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:gravity="center"
+    >
+
+    <ViewSwitcher
+        android:id="@+id/id_viewSwitcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            carc_view:cardBackgroundColor="@color/material_blue_100"
+            carc_view:cardCornerRadius="30dp"
+            android:elevation="10dp">
+        <TableLayout
+            android:id="@+id/id_tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:stretchColumns="0">
+
+            <TableRow>
+                <android.support.design.widget.TextInputLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    style="@style/MyTextInputLayout"
+                    >
+
+                <EditText
+                    android:id="@+id/id_row1"
+                    style="@style/MyEditText"
+                    android:hint="日期"
+              />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </TableRow>
+
+            <TableRow>
+                <android.support.design.widget.TextInputLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    style="@style/MyTextInputLayout"
+                    >
+
+                    <EditText
+                        android:id="@+id/id_row2"
+                        style="@style/MyEditText"
+                        android:hint="周次"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </TableRow>
+
+            <TableRow>
+                <android.support.design.widget.TextInputLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    style="@style/MyTextInputLayout"
+                    >
+
+                    <EditText
+                        android:id="@+id/id_row3"
+                        style="@style/MyEditText"
+                        android:hint="学院"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </TableRow>
+
+            <TableRow>
+                <android.support.design.widget.TextInputLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    style="@style/MyTextInputLayout"
+                    >
+
+                    <EditText
+                        android:id="@+id/id_row4"
+                        style="@style/MyEditText"
+                        android:hint="周几"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </TableRow>
+
+            <TableRow>
+                <android.support.design.widget.TextInputLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    style="@style/MyTextInputLayout"
+                    >
+
+                    <EditText
+                        android:id="@+id/id_row5"
+                        style="@style/MyEditText"
+                        android:hint="节次"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </TableRow>
+
+
+        </TableLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/id_viewPager"
+            android:layout_width="wrap_content"
+            android:layout_height="108dp"
+            android:background="@color/material_blue_100"/>
+
+
+    </ViewSwitcher>
+
+        <Button
+            android:id="@+id/id_btn_submit"
+            android:layout_width="88dp"
+            android:layout_height="46dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/flat_btn_bg"
+            android:text="提交记录"
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+
+
 
 </LinearLayout>

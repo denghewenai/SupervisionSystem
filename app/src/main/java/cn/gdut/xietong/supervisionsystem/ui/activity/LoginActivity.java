@@ -20,6 +20,7 @@ import cn.gdut.xietong.supervisionsystem.R;
 import cn.gdut.xietong.supervisionsystem.config.Config;
 import cn.gdut.xietong.supervisionsystem.utils.CommonUtils;
 import cn.gdut.xietong.supervisionsystem.utils.OkHttpUtils;
+import cn.gdut.xietong.supervisionsystem.utils.SPUtils;
 
 /**
  * 登录界面
@@ -31,6 +32,9 @@ public class LoginActivity extends BaseActivity{
     private EditText et_username;
     private EditText et_password;
     private Handler handler;
+
+    private String username;
+    private String password;
 
     @Override
     protected void initFragment(Bundle savedInstanceState) {
@@ -47,6 +51,17 @@ public class LoginActivity extends BaseActivity{
         btn_login = (Button) findViewById(R.id.btn_login);
         et_username = (EditText) findViewById(R.id.id_et_username);
         et_password = (EditText) findViewById(R.id.id_et_password);
+
+        username = (String) SPUtils.get(LoginActivity.this,"username","admin");
+        password = (String) SPUtils.get(LoginActivity.this,"password","password");
+
+        Log.i("info",username+"username"+ password + "password");
+        if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password) ){
+            et_username.setText(username);
+            et_password.setText(password);
+            login();
+        }
+
         handler = new Handler();
     }
 
@@ -66,8 +81,9 @@ public class LoginActivity extends BaseActivity{
     }
 
     private void login() {
-        String username = et_username.getText().toString();
-        String password = et_password.getText().toString();
+        username = et_username.getText().toString();
+        password = et_password.getText().toString();
+
         final String urlString = String.format(Config.URL_LOGIN,username,password);
 
         Log.i("info",urlString);
@@ -92,7 +108,9 @@ public class LoginActivity extends BaseActivity{
                     @Override
                     public void run() {
                         pd.dismiss();
-                        showToast("登陆失败");
+                        et_username.setText("");
+                        et_password.setText("");
+                        showToast("登陆失败,请重试");
                     }
                 });
             }
@@ -106,6 +124,8 @@ public class LoginActivity extends BaseActivity{
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            SPUtils.put(LoginActivity.this,"username",username);
+                            SPUtils.put(LoginActivity.this,"password",password);
                             startAnimActivity(MainActivity.class);
                             pd.dismiss();
                             finish();
@@ -123,4 +143,5 @@ public class LoginActivity extends BaseActivity{
             }
         }, "login");
     }
+
 }

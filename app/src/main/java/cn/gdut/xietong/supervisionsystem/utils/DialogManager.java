@@ -49,14 +49,13 @@ public class DialogManager {
         dialogFragment.show(fragmentManager, "DatePickerDialog");
     }
 
-    public void showSingleChoiceDialog(DialogFragmentCallbackProvider provider, FragmentManager fragmentManager) {
+    public void showSingleChoiceDialog(DialogFragmentCallbackProvider provider, FragmentManager fragmentManager,String[] items,String title) {
 
-        String[] items = {"是", "否"};
         Bundle extra = new Bundle();
         extra.putStringArray("items", items);
 
         new AlertDialogFragment.Builder(mContext,R.style.CustomDialog)
-                .setTitle("老师是否按时上课")
+                .setTitle(title)
                 .setSingleChoiceItems(items, 0)
                 .setExtra(extra)
                 .show(fragmentManager, "SingleChoiceDialog");

@@ -22,15 +22,15 @@ public class Config {
             "eduSurveybookingController.do?doUpdate_android";
 
     //取消预约
-    public static final String URL_DELETE_ORDER = "http://localhost:8080/jeecg3.6.2/" +
+    public static final String URL_DELETE_ORDER = "http://10.21.71.50:8080/jeecg3.6.2/" +
             "eduSurveybookingController.do?doBatchDel_android";
 
     //督导预约查询
-    public static final String URL_ORDER_QUERY = "http://localhost:8080/jeecg3.6.2/" +
-            "SurveyBookController.do?doSearch_android";
+    public static final String URL_ORDER_QUERY = "http://10.21.71.50:8088/jeecg3.6.2/" +
+            "SurveyBookController.do?doSearch_android&semesterSearch=%s&weekNo=%s&studentFaculty=%s&weekNameSearch=%s&sectionSearch=%s";
 
     //督导预约
-    public static final String URL_ORDER = "http://localhost:8080/jeecg3.6.2/" +
+    public static final String URL_ORDER = "http://10.21.71.50:8080/jeecg3.6.2/" +
             "SurveyBookController.do?doUpdate_android";
 
     public static final String[] WITHICON_FIRST = {"校区  *必填","日期  *必填","节次  *必填",
@@ -179,4 +179,16 @@ public class Config {
                     {"未设定", "语音室1", "语音室2", "语音室3", "语音室4"}
             }
     };
+
+    public static final String[] WEEK_NO = {"第1周","第2周","第3周",
+            "第4周","第5周","第6周","第7周","第8周","第9周","第10周","第11周","第12周",
+            "第13周","第14周","第15周","第16周","第17周","第18周","第19周"};
+
+    public static final String[] FACULTY = { "建筑与城市规划学院", "政法学院", "管理学院", "艺术设计学院",
+            "机电工程学院", "应用数学学院", "经济与贸易学院", "轻工化工学院", "土木与交通工程学院", "材料与能源学院",
+            "物理与光电工程学院", "自动化学院", "信息工程学院", "计算机学院", "商学院", "环境科学与工程学院",
+            "外国语学院", "无", "本科"};
+
+    public static final String[] WEEK_NAME = {"周一","周二","周三","周四","周五","周六","周日"};
+
 }

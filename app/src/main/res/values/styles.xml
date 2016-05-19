@@ -53,4 +53,68 @@
             <item name="android:backgroundDimAmount">0.4</item>
         </style>
 
+    <style name="MyTextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="MyEditText" parent="Base.V7.Widget.AppCompat.EditText">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:inputType">none</item>
+        <item name="android:editable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:drawableEnd">@drawable/icon_edittext_drop</item>
+        <item name="android:drawableRight">@drawable/icon_edittext_drop</item>
+        <item name="android:textColorHint">#99ffffff</item>
+
+    </style>
+
+    <style name="myEditTextNoIcon" parent="Base.V7.Widget.AppCompat.EditText">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+
+    </style>
+
+    <!-- 一系列大文字-->
+    <style name="my_tv_message_large">
+
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#000000</item>
+
+    </style>
+
+    <!--一系列小文字-->
+    <style name="my_tv_message_small">
+
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#a7a7a7</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginTop">5dp</item>
+
+    </style>
+
+    <!-- 中等大小文字-->
+    <style name="my_tv_message_middle">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#a7a7a7</item>
+        <item name="android:singleLine">true</item>
+
+    </style>
+
 </resources>
