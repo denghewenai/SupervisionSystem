@@ -1,7 +1,5 @@
 package cn.gdut.xietong.supervisionsystem.model;
 
-import java.util.Date;
-
 /**
  * Created by Administrator on 2016/4/26.
  */
@@ -28,7 +26,7 @@ public class DuDaoBook {
     //终始周
     private String week;
     //预约日期
-    private Date bookingDate;
+    private String bookingDate;
 
     //查询：周次
     private int weekNo;
@@ -121,11 +119,11 @@ public class DuDaoBook {
         this.week = week;
     }
 
-    public Date getBookingDate() {
+    public String getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
+    public void setBookingDate(String bookingDate) {
         this.bookingDate = bookingDate;
     }
 

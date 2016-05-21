@@ -14,7 +14,7 @@ public class Config {
     public static final String URL_LOGIN = "http://10.21.71.50:8088/jeecg3.6.2/user_PADLogin.do?login&userName=%s&password=%s" ;
 
     //预约管理
-    public static final String URL_MANAGE_ORDER = "http://10.21.71.114:8080/jeecg3.6.2/eduSurveybookingController.do?" +
+    public static final String URL_MANAGE_ORDER = "http://10.21.71.50:8088/jeecg3.6.2/eduSurveybookingController.do?" +
             "eduSurveybooking_android";
 
     //督导预约录入
