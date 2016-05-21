@@ -33,6 +33,9 @@ public class Config {
     public static final String URL_ORDER = "http://10.21.71.50:8080/jeecg3.6.2/" +
             "SurveyBookController.do?doUpdate_android";
 
+    //管理员督导管理
+    public static final String URL_DUDAO_MANAGER = "http://10.21.71.50:8088/jeecg3.6.2/phonesurveyController.do?manager";
+
     public static final String[] WITHICON_FIRST = {"校区  *必填","日期  *必填","节次  *必填",
             "上课地点  *必填","老师是否按时情况 *必填"};
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.SimpleAdapter;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -16,7 +15,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import cn.gdut.xietong.supervisionsystem.R;
@@ -33,9 +31,7 @@ import cn.gdut.xietong.supervisionsystem.utils.TimeUtil;
 public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXListViewListener{
     private String TAG = "DuDaoGuanLiFragment";
     private XListView mListView;
-    private SimpleAdapter mAdapter1;
     private Handler mHandler;
-    private ArrayList<HashMap<String, Object>> dlist;
     private String URL = Config.URL_MANAGE_ORDER;
     private String super_tag = "test";
     private List<DuDaoBook> list_book;
@@ -53,15 +49,11 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 
     @Override
     protected void initViews(View mContentView) {
-        dlist = new ArrayList<HashMap<String, Object>>();
         list_book = new ArrayList<DuDaoBook>();
-        list_book = jsonHitoryData();
         mListView = (XListView) findViewById(R.id.listView_YuYue);// 你这个listview是在这个layout里面
-        mListView.setPullLoadEnable(true);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
+        mListView.setPullLoadEnable(false);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
+        list_book = jsonHitoryData();
         myAdapter = new ManagerAdapter(getActivity(),R.layout.fragment_ddmanager_list_item,list_book);
-//        mAdapter1 = new SimpleAdapter(getActivity(), getData(),
-//                R.layout.view_listview_items, new String[] { "name","place" },
-//                new int[] { R.id.txt_name,R.id.txt_place });
         mListView.setAdapter(myAdapter);
         mListView.setXListViewListener(this);
         mHandler = new Handler();
@@ -82,6 +74,7 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
                 list_book = jsonHitoryData();
 //                myAdapter = new ManagerAdapter(getActivity(),R.layout.fragment_ddmanager_list_item,list_book);
                 myAdapter.notifyDataSetChanged();
+                mListView.setAdapter(myAdapter);
                 onLoad();
             }
         }, 2000);
@@ -100,10 +93,8 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 
             @Override
             public void run() {
-//                getData();
-//                mAdapter1.notifyDataSetChanged();
                 list_book = jsonHitoryData();
-                myAdapter = new ManagerAdapter(getActivity(),R.layout.fragment_ddmanager_list_item,list_book);
+                myAdapter.notifyDataSetChanged();
                 mListView.setAdapter(myAdapter);
                 onLoad();
             }

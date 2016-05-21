@@ -1,7 +1,5 @@
 package cn.gdut.xietong.supervisionsystem.model;
 
-import java.util.Date;
-
 /**
  * Created by mr.deng on 2016/4/26.
  */
@@ -12,7 +10,7 @@ public class DuDaoLuRu {
     //	校区
     private java.lang.Integer schoolDistrict;
     //	日期
-    private Date date;
+    private String date;
     //	节次
     private String section;
     //	上课地点
@@ -42,7 +40,7 @@ public class DuDaoLuRu {
     //	穿拖鞋短裙情况（人数）
     private int slipperShortsNum;
     //	督导时间
-    private Date surveyTime;
+    private String surveyTime;
     //	其他情况
     private String otherSituation;
     //	老师是否按时情况
@@ -52,11 +50,13 @@ public class DuDaoLuRu {
 
     private String addUser;
 
-    private Date addTime;
+    private String addTime;
 
     private String modifyUser;
 
-    private Date modifyTime;
+    private String modifyTime;
+    //学期
+    private String courseClassNo;
 
     public String getId() {
         return id;
@@ -74,11 +74,11 @@ public class DuDaoLuRu {
         this.schoolDistrict = schoolDistrict;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -194,11 +194,11 @@ public class DuDaoLuRu {
         this.slipperShortsNum = slipperShortsNum;
     }
 
-    public Date getSurveyTime() {
+    public String getSurveyTime() {
         return surveyTime;
     }
 
-    public void setSurveyTime(Date surveyTime) {
+    public void setSurveyTime(String surveyTime) {
         this.surveyTime = surveyTime;
     }
 
@@ -234,11 +234,11 @@ public class DuDaoLuRu {
         this.addUser = addUser;
     }
 
-    public Date getAddTime() {
+    public String getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Date addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
     }
 
@@ -250,11 +250,19 @@ public class DuDaoLuRu {
         this.modifyUser = modifyUser;
     }
 
-    public Date getModifyTime() {
+    public String getModifyTime() {
         return modifyTime;
     }
 
-    public void setModifyTime(Date modifyTime) {
+    public void setModifyTime(String modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getCourseClassNo() {
+        return courseClassNo;
+    }
+
+    public void setCourseClassNo(String courseClassNo) {
+        this.courseClassNo = courseClassNo;
     }
 }
