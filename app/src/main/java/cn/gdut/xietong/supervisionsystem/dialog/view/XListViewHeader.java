@@ -96,13 +96,13 @@ public class XListViewHeader extends LinearLayout {
                 if (mState == STATE_REFRESHING) {// 当状态显示进度条的时候，清除动画
                     mArrowImageView.clearAnimation();
                 }
-                mHintTextView.setText("下拉刷新");// 文字提示：下拉刷新
+                mHintTextView.setText("下拉加载上一页");// 文字提示：下拉刷新
                 break;
             case STATE_READY:
                 if (mState != STATE_READY) {
                     mArrowImageView.clearAnimation();
                     mArrowImageView.startAnimation(mRotateUpAnim);
-                    mHintTextView.setText("松开刷新数据");// 松开刷新数据
+                    mHintTextView.setText("松开加载数据");// 松开刷新数据
                 }
                 break;
             case STATE_REFRESHING:

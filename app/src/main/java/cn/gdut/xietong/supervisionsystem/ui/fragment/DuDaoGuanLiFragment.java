@@ -1,7 +1,9 @@
 package cn.gdut.xietong.supervisionsystem.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
@@ -30,6 +32,7 @@ import cn.gdut.xietong.supervisionsystem.utils.TimeUtil;
  */
 public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXListViewListener{
     private String TAG = "DuDaoGuanLiFragment";
+    private final int MESSAGE_JSON = 1;//设置刷新完发送消息
     private XListView mListView;
     private Handler mHandler;
     private String URL = Config.URL_MANAGE_ORDER;
@@ -37,11 +40,9 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
     private List<DuDaoBook> list_book;
     private ManagerAdapter myAdapter;
     private int Number = 5;
-    /** 初始化本地数据 */
-    String data[] = new String[] { "姓名：吴德永1", "姓名：吴德永2", "姓名：吴德永3",
-            "姓名：吴德永4", "姓名：吴德永5" };
-    String data1[] = new String[] { "抚顺县救兵乡王木村", "抚顺县救兵乡王木村", "抚顺县救兵乡王木村",
-            "抚顺县救兵乡王木村", "抚顺县救兵乡王木村" };
+    private myThread mThread = new myThread();
+    private myHandler handler = new myHandler();
+    private ProgressDialog pd;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_news;
@@ -52,9 +53,10 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
         list_book = new ArrayList<DuDaoBook>();
         mListView = (XListView) findViewById(R.id.listView_YuYue);// 你这个listview是在这个layout里面
         mListView.setPullLoadEnable(true);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
-        list_book = jsonHitoryData();
-        myAdapter = new ManagerAdapter(getActivity(),R.layout.fragment_ddmanager_list_item,list_book);
-        mListView.setAdapter(myAdapter);
+        pd = ProgressDialog.show(getActivity(),"正在获取消息，请稍后","正在获取消息，请稍后……");
+        jsonHitoryData();
+//        myAdapter = new ManagerAdapter(getActivity(),R.layout.fragment_ddmanager_list_item,list_book);
+//        mListView.setAdapter(myAdapter);
         mListView.setXListViewListener(this);
         mHandler = new Handler();
     }
@@ -66,6 +68,7 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 
     @Override
     public void onRefresh() {
+        pd.show();
         Number += 5;
         mHandler.postDelayed(new Runnable() {
 
@@ -73,7 +76,7 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
             public void run() {
                 jsonHitoryData();
 //                myAdapter.notifyDataSetChanged();
-                mListView.setAdapter(myAdapter);
+//                mListView.setAdapter(myAdapter);
                 onLoad();
             }
         }, 2000);
@@ -87,23 +90,50 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 
     @Override
     public void onLoadMore() {
+        pd.show();
         Number += 5;
         mHandler.postDelayed(new Runnable() {
 
             @Override
             public void run() {
                 jsonHitoryData();
-                myAdapter.notifyDataSetChanged();
+//                myAdapter.notifyDataSetChanged();
                 onLoad();
             }
         }, 2000);
         Log.i(TAG,"onLoadMore");
     }
+    class myThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            Message msg = Message.obtain();
+            msg.what = MESSAGE_JSON;
+            handler.sendMessage(msg);
+        }
+    }
+    class myHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == MESSAGE_JSON){
+                if(myAdapter==null){
+                    Log.i(TAG,"list_book="+list_book);
+                    myAdapter = new ManagerAdapter(getActivity(),R.layout.fragment_ddmanager_list_item,list_book);
+                    mListView.setAdapter(myAdapter);
+                }else {
+                    myAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+    }
     private List<DuDaoBook> jsonHitoryData(){
+//        final ProgressDialog pd = ProgressDialog.show(getActivity(),"正在获取消息，请稍后","正在获取消息，请稍后……");
         OkHttpUtils.getDataAsync(getActivity(),URL, new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
                 Log.i(TAG,"失败="+request);
+                pd.dismiss();
             }
 
             @Override
@@ -135,7 +165,10 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }finally {
+                    pd.dismiss();
                 }
+                mThread.run();
             }
         },super_tag);
         return list_book;

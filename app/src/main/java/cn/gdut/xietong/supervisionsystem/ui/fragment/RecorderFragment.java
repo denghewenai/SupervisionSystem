@@ -34,11 +34,11 @@ import cn.gdut.xietong.supervisionsystem.utils.TimeUtil;
 public class RecorderFragment extends BaseFragment implements XListView.IXListViewListener{
 
     private final int MESSAGE_JSON = 1;//设置刷新完发送消息
-    private final int ROW_MAX = 20;
+    private final int ROW_MAX = 20,PAGE_MIN = 1;
     private String data;
     private String TAG = "RecorderFragment";
     private int row = 5,page = 1;
-    private String URL = "http://10.21.71.50:8088/jeecg3.6.2/phonesurveyController.do?manager&page="+page+"&row="+row;
+    private String URL = "http://10.21.71.50:8088/jeecg3.6.2/phonesurveyController.do?manager&page="+page+"&row=20";
     private XListView mListView;
     private SimpleAdapter mAdapter1;
     private Handler mHandler;
@@ -49,6 +49,7 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
     private boolean flag = false;
     private myThread mThread = new myThread();
     private myHandler handler = new myHandler();
+    private ProgressDialog pd;
 //    /** 初始化本地数据 */
 //    String data[] = new String[] { "姓名：吴德永1", "姓名：吴德永2", "姓名：吴德永3",
 //            "姓名：吴德永4", "姓名：吴德永5" };
@@ -66,6 +67,7 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
         dlist = new ArrayList<HashMap<String, Object>>();
         mListView = (XListView) findViewById(R.id.listView_ListView);// 你这个listview是在这个layout里面
         mListView.setPullLoadEnable(true);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
+        pd = ProgressDialog.show(getActivity(),"正在获取第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
         jsonHitoryData();
 //        mAdapter = new RecordFragmentAdapter(getActivity(), R.layout.fragment_record_list_item , list_book);
 //        mListView.setAdapter(mAdapter);
@@ -90,34 +92,36 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
     // 刷新
     @Override
     public void onRefresh() {
-        if(row == ROW_MAX){
-            page ++;
-            row = 5;
-        }else {
-            row += 5;
-        }
-        mHandler.postDelayed(new Runnable() {
+        if(page > PAGE_MIN){
+            page --;
+//            row = 20;
+            pd = ProgressDialog.show(getActivity(),"正在切换第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
+            mHandler.postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-//                getData();
-//                mListView.setAdapter(mAdapter1);
-                jsonHitoryData();
-//                mListView.setAdapter(mAdapter);
-                onLoad();
-            }
-        }, 2000);
+                @Override
+                public void run() {
+                    jsonHitoryData();
+                    onLoad();
+                }
+            }, 2000);
+        }else {
+            showToast("已经是第一页了,点击最下面加载下一页");
+            onLoad();
+        }
     }
 
     // 加载更多
     @Override
     public void onLoadMore() {
-        if(row == ROW_MAX){
+//        if(row == ROW_MAX){
             page ++;
-            row = 5;
-        }else {
-            row += 5;
-        }
+//            row = 5;
+            pd = ProgressDialog.show(getActivity(),"正在获取第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
+//        }else {
+//            pd = ProgressDialog.show(getActivity(),"正在获取第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
+//            row += 5;
+//            pd.show();
+//        }
         mHandler.postDelayed(new Runnable() {
 
             @Override
@@ -152,9 +156,9 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
         }
     }
     private void jsonHitoryData(){
-        URL = "http://10.21.71.50:8088/jeecg3.6.2/phonesurveyController.do?manager&page="+page+"&row="+row;
+        URL = "http://10.21.71.50:8088/jeecg3.6.2/phonesurveyController.do?manager&page="+page+"&row=20";
         Log.i(TAG,"URL="+URL);
-        final ProgressDialog pd = ProgressDialog.show(getActivity(),"正在获取消息，请稍后","正在获取消息，请稍后");
+//        final ProgressDialog pd = ProgressDialog.show(getActivity(),"正在获取消息，请稍后","正在获取消息，请稍后");
         OkHttpUtils.getDataAsync(getActivity(),URL, new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -182,100 +186,85 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
                         myBook.setClassroom(data_object.getString("lessonClassroom"));//教室
 //                        Log.i(TAG,"studentFaculty="+data_object.getString("studentFaculty"));
                         myBook.setStudentFaculty(data_object.getString("studentFaculty"));//学院
-                        try {
-                            myBook.setActualPopulation(data_object.getInt("actualNum"));//实际人数
-                        }catch (Exception e){
-                            myBook.setActualPopulation(0);
+                        if(data_object.getString("actualNum")=="null"){
+                            myBook.setActualPopulation("0");
+                        }else{
+                            myBook.setActualPopulation(data_object.getString("actualNum"));//实际人数
                         }
-
-                        try {
-                            myBook.setTruantNum(data_object.getInt("truantNum"));//旷课情况（人数)
-                        }catch (Exception e){
-                            myBook.setTruantNum(0);
+                        if(data_object.getString("truantNum")=="null"){
+                            myBook.setTruantNum("0");
+                        }else{
+                            myBook.setTruantNum(data_object.getString("truantNum"));//旷课情况（人数)
                         }
-
-                        try {
-                            myBook.setLateLeaveEarlyNum(Integer.parseInt(data_object.getString("lateLeaveearlyNum")));//早退人数
-                        }catch (Exception e){
-                            myBook.setLateLeaveEarlyNum(0);
+                        if(data_object.getString("lateLeaveearlyNum")=="null"){
+                            myBook.setLateLeaveEarlyNum("0");
+                        }else {
+                            myBook.setLateLeaveEarlyNum(data_object.getString("lateLeaveearlyNum"));//早退人数
                         }
-
-                        try{
-                            myBook.setVacateNum(Integer.parseInt(data_object.getString("vacateNum")));//请假情况（人数）测试到这里了
-                        }catch(Exception e) {
-                            myBook.setVacateNum(0);//请假情况（人数）
+                        if(data_object.getString("vacateNum")=="null"){
+                            myBook.setVacateNum("0");
+                        }else {
+                            myBook.setVacateNum(data_object.getString("vacateNum"));//请假情况（人数）测试到这里了
                         }
-
-                        try{
-                            myBook.setPlayMobilNum(data_object.getInt("playMobilNum"));//玩手机人数
-                        }catch(Exception e) {
-                            myBook.setPlayMobilNum(0);//玩手机人数
+                        if(data_object.getString("playMobilNum")=="null"){
+                            myBook.setPlayMobilNum("0");
+                        }else {
+                            myBook.setPlayMobilNum(data_object.getString("playMobilNum"));//玩手机人数
                         }
-
-                        try{
-                            myBook.setFoodEatNum(data_object.getInt("foodEatNum"));//吃东西
-                        }catch(Exception e) {
-                            myBook.setFoodEatNum(0);//吃东西
+                        if(data_object.getString("foodEatNum")=="null"){
+                            myBook.setFoodEatNum("0");
+                        }else {
+                            myBook.setFoodEatNum(data_object.getString("foodEatNum"));//吃东西
                         }
-
-                        try{
-                            myBook.setSleepSpeakNum(data_object.getInt("sleepSpeakNum"));//睡觉说话
-                        }catch(Exception e) {
-                            myBook.setSleepSpeakNum(0);//睡觉说话
+                        if(data_object.getString("sleepSpeakNum")=="null"){
+                            myBook.setSleepSpeakNum("0");
+                        }else {
+                            myBook.setSleepSpeakNum(data_object.getString("sleepSpeakNum"));//睡觉说话
                         }
-
-                        try{
-                            myBook.setSlipperShortsNum(data_object.getInt("slipperShortsNum"));//穿拖鞋短裙
-                        }catch(Exception e) {
-                            myBook.setSlipperShortsNum(0);//穿拖鞋短裙
+                        if(data_object.getString("slipperShortsNum")=="null"){
+                            myBook.setSlipperShortsNum("0");//穿拖鞋短裙
+                        }else {
+                            myBook.setSlipperShortsNum(data_object.getString("slipperShortsNum"));//穿拖鞋短裙
                         }
-
-                        try{
+                        if(data_object.getString("surveyTime")=="null"){
+                            myBook.setSurveyTime("0");//穿拖鞋短裙
+                        }else {
                             myBook.setSurveyTime(data_object.getString("surveyTime"));//调查时间，后台传过来的是null
-                        }catch(Exception e) {
-                            myBook.setSurveyTime("无数据");//调查时间
                         }
-
-                        try{
+                        if(data_object.getString("otherSituation")=="null"){
+                            myBook.setOtherSituation("无数据");//其他情况
+                        }else{
                             myBook.setOtherSituation(data_object.getString("otherSituation"));//其他情况
-                        }catch(Exception e) {
-                            myBook.setSurveyTime("无数据");//其他情况
                         }
-
-                        try{
-                            myBook.setTeacherOntime(data_object.getInt("teacherOntime"));//老师是否准时
-                        }catch(Exception e) {
-                            myBook.setTeacherOntime(0);//老师是否准时
+                        if(data_object.getString("teacherOntime")=="null"){
+                            myBook.setTeacherOntime("无数据");//其他情况
+                        }else{
+                            myBook.setTeacherOntime(data_object.getString("teacherOntime"));//老师是否准时
                         }
-
-                        try{
-                            myBook.setSupervisor(data_object.getString("supervisor"));//督导员
-                        }catch(Exception e) {
+                        if(data_object.getString("supervisor")=="null"){
                             myBook.setSupervisor("无数据");//督导员
+                        }else{
+                            myBook.setSupervisor(data_object.getString("supervisor"));//督导员
                         }
-
-                        try{
+                        if(data_object.getString("addUser")=="null"){
+                            myBook.setAddUser("无数据");//督导员
+                        }else{
                             myBook.setAddUser(data_object.getString("addUser"));
-                        }catch(Exception e) {
-                            myBook.setAddUser("无数据");
                         }
-
-                        try{
+                        if(data_object.getString("addTime")=="null"){
+                            myBook.setAddTime("无数据");//督导员
+                        }else{
                             myBook.setAddTime(data_object.getString("addTime"));
-                        }catch(Exception e) {
-                            myBook.setAddTime("无数据");
                         }
-
-                        try{
+                        if(data_object.getString("modifyUser")=="null"){
+                            myBook.setModifyUser("无数据");//督导员
+                        }else{
                             myBook.setModifyUser(data_object.getString("modifyUser"));
-                        }catch(Exception e) {
-                            myBook.setModifyUser("无数据");
                         }
-
-                        try{
+                        if(data_object.getString("courseClassNo")=="null"){
+                            myBook.setCourseClassNo("无数据");//督导员
+                        }else{
                             myBook.setCourseClassNo(data_object.getString("courseClassNo"));//学期
-                        }catch(Exception e) {
-                            myBook.setCourseClassNo("无数据");
                         }
                         list_book.add(myBook);
                         Log.i(TAG,"myBook="+myBook);

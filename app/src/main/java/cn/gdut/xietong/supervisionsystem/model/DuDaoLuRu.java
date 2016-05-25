@@ -22,29 +22,29 @@ public class DuDaoLuRu {
     //	教学班组成
     private String classgroup;
     //	应到人数
-    private int planPopulation;
+    private String planPopulation;
     //	实际人数
-    private int actualPopulation;
+    private String actualPopulation;
     //	迟到早退情况（人数）
-    private int lateLeaveEarlyNum;
+    private String lateLeaveEarlyNum;
     //	旷课情况（人数）
-    private int truantNum;
+    private String truantNum;
     //	请假情况（人数）
-    private int vacateNum;
+    private String vacateNum;
     //	玩手机情况（人数）
-    private int playMobilNum;
+    private String playMobilNum;
     //	吃东西情况（人数）
-    private int foodEatNum;
+    private String foodEatNum;
     //	睡觉讲话情况（人数）
-    private int sleepSpeakNum;
+    private String sleepSpeakNum;
     //	穿拖鞋短裙情况（人数）
-    private int slipperShortsNum;
+    private String slipperShortsNum;
     //	督导时间
     private String surveyTime;
     //	其他情况
     private String otherSituation;
     //	老师是否按时情况
-    private int teacherOntime;
+    private String teacherOntime;
     //	督导员签名
     private String supervisor;
 
@@ -122,75 +122,75 @@ public class DuDaoLuRu {
         this.classgroup = classgroup;
     }
 
-    public int getPlanPopulation() {
+    public String getPlanPopulation() {
         return planPopulation;
     }
 
-    public void setPlanPopulation(int planPopulation) {
+    public void setPlanPopulation(String planPopulation) {
         this.planPopulation = planPopulation;
     }
 
-    public int getActualPopulation() {
+    public String getActualPopulation() {
         return actualPopulation;
     }
 
-    public void setActualPopulation(int actualPopulation) {
+    public void setActualPopulation(String actualPopulation) {
         this.actualPopulation = actualPopulation;
     }
 
-    public int getLateLeaveEarlyNum() {
+    public String getLateLeaveEarlyNum() {
         return lateLeaveEarlyNum;
     }
 
-    public void setLateLeaveEarlyNum(int lateLeaveEarlyNum) {
+    public void setLateLeaveEarlyNum(String lateLeaveEarlyNum) {
         this.lateLeaveEarlyNum = lateLeaveEarlyNum;
     }
 
-    public int getTruantNum() {
+    public String getTruantNum() {
         return truantNum;
     }
 
-    public void setTruantNum(int truantNum) {
+    public void setTruantNum(String truantNum) {
         this.truantNum = truantNum;
     }
 
-    public int getVacateNum() {
+    public String getVacateNum() {
         return vacateNum;
     }
 
-    public void setVacateNum(int vacateNum) {
+    public void setVacateNum(String vacateNum) {
         this.vacateNum = vacateNum;
     }
 
-    public int getPlayMobilNum() {
+    public String getPlayMobilNum() {
         return playMobilNum;
     }
 
-    public void setPlayMobilNum(int playMobilNum) {
+    public void setPlayMobilNum(String playMobilNum) {
         this.playMobilNum = playMobilNum;
     }
 
-    public int getFoodEatNum() {
+    public String getFoodEatNum() {
         return foodEatNum;
     }
 
-    public void setFoodEatNum(int foodEatNum) {
+    public void setFoodEatNum(String foodEatNum) {
         this.foodEatNum = foodEatNum;
     }
 
-    public int getSleepSpeakNum() {
+    public String getSleepSpeakNum() {
         return sleepSpeakNum;
     }
 
-    public void setSleepSpeakNum(int sleepSpeakNum) {
+    public void setSleepSpeakNum(String sleepSpeakNum) {
         this.sleepSpeakNum = sleepSpeakNum;
     }
 
-    public int getSlipperShortsNum() {
+    public String getSlipperShortsNum() {
         return slipperShortsNum;
     }
 
-    public void setSlipperShortsNum(int slipperShortsNum) {
+    public void setSlipperShortsNum(String slipperShortsNum) {
         this.slipperShortsNum = slipperShortsNum;
     }
 
@@ -210,11 +210,11 @@ public class DuDaoLuRu {
         this.otherSituation = otherSituation;
     }
 
-    public int getTeacherOntime() {
+    public String getTeacherOntime() {
         return teacherOntime;
     }
 
-    public void setTeacherOntime(int teacherOntime) {
+    public void setTeacherOntime(String teacherOntime) {
         this.teacherOntime = teacherOntime;
     }
 
