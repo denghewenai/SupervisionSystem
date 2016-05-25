@@ -12,15 +12,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="督导员:"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
         <TextView
             android:id="@+id/txt_DDmanager_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3114002222"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,42 +30,42 @@
             android:paddingLeft="4dp"
             android:text="教室:"
             android:textStyle="normal"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
         <TextView
             android:id="@+id/txt_DDmanager_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="教3-201"
             android:textStyle="italic"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:text="学院:"
             android:textStyle="normal"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
         <TextView
             android:id="@+id/txt_DDmanager_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="计算机学院"
+            android:text="物理与机电学院"
             android:textStyle="italic"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:text="课程时间:"
             android:textStyle="normal"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
         <TextView
             android:id="@+id/txt_DDmanager_months"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2014-06-19"
             android:textStyle="italic"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
     </LinearLayout>
 

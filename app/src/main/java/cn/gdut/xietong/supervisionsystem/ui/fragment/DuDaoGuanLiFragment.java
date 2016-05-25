@@ -51,7 +51,7 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
     protected void initViews(View mContentView) {
         list_book = new ArrayList<DuDaoBook>();
         mListView = (XListView) findViewById(R.id.listView_YuYue);// 你这个listview是在这个layout里面
-        mListView.setPullLoadEnable(false);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
+        mListView.setPullLoadEnable(true);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
         list_book = jsonHitoryData();
         myAdapter = new ManagerAdapter(getActivity(),R.layout.fragment_ddmanager_list_item,list_book);
         mListView.setAdapter(myAdapter);
@@ -71,9 +71,8 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 
             @Override
             public void run() {
-                list_book = jsonHitoryData();
-//                myAdapter = new ManagerAdapter(getActivity(),R.layout.fragment_ddmanager_list_item,list_book);
-                myAdapter.notifyDataSetChanged();
+                jsonHitoryData();
+//                myAdapter.notifyDataSetChanged();
                 mListView.setAdapter(myAdapter);
                 onLoad();
             }
@@ -93,16 +92,14 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 
             @Override
             public void run() {
-                list_book = jsonHitoryData();
+                jsonHitoryData();
                 myAdapter.notifyDataSetChanged();
-                mListView.setAdapter(myAdapter);
                 onLoad();
             }
         }, 2000);
         Log.i(TAG,"onLoadMore");
     }
     private List<DuDaoBook> jsonHitoryData(){
-        final List<DuDaoBook> list = new ArrayList<DuDaoBook>();
         OkHttpUtils.getDataAsync(getActivity(),URL, new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -111,6 +108,9 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 
             @Override
             public void onResponse(Response response) throws IOException {
+                if(list_book!=null){
+                    list_book.clear();
+                }
                 String data = response.body().string();
                 try {
                     JSONObject myJson = new JSONObject(data);
@@ -131,13 +131,13 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
                         myBook.setBookingDate(Booking_date);//预约日期
                         myBook.setWeekNo(Integer.parseInt(data_object.getString("weekNo")));//查询：周次
                         myBook.setCommenceDept(data_object.getString("studentFaculty"));//学院名称
-                        list.add(myBook);
+                        list_book.add(myBook);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         },super_tag);
-        return list;
+        return list_book;
     }
 }
