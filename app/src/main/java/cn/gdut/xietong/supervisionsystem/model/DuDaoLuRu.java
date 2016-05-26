@@ -265,4 +265,36 @@ public class DuDaoLuRu {
     public void setCourseClassNo(String courseClassNo) {
         this.courseClassNo = courseClassNo;
     }
+
+    @Override
+    public String toString() {
+        return "DuDaoLuRu{" +
+                "id='" + id + '\'' +
+                ", schoolDistrict=" + schoolDistrict +
+                ", date='" + date + '\'' +
+                ", section='" + section + '\'' +
+                ", classroom='" + classroom + '\'' +
+                ", studentFaculty='" + studentFaculty + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", classgroup='" + classgroup + '\'' +
+                ", planPopulation=" + planPopulation +
+                ", actualPopulation=" + actualPopulation +
+                ", lateLeaveEarlyNum=" + lateLeaveEarlyNum +
+                ", truantNum=" + truantNum +
+                ", vacateNum=" + vacateNum +
+                ", playMobilNum=" + playMobilNum +
+                ", foodEatNum=" + foodEatNum +
+                ", sleepSpeakNum=" + sleepSpeakNum +
+                ", slipperShortsNum=" + slipperShortsNum +
+                ", surveyTime='" + surveyTime + '\'' +
+                ", otherSituation='" + otherSituation + '\'' +
+                ", teacherOntime=" + teacherOntime +
+                ", supervisor='" + supervisor + '\'' +
+                ", addUser='" + addUser + '\'' +
+                ", addTime='" + addTime + '\'' +
+                ", modifyUser='" + modifyUser + '\'' +
+                ", modifyTime='" + modifyTime + '\'' +
+                ", courseClassNo='" + courseClassNo + '\'' +
+                '}';
+    }
 }

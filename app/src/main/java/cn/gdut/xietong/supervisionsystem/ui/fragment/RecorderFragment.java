@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.SimpleAdapter;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -18,11 +17,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.gdut.xietong.supervisionsystem.R;
 import cn.gdut.xietong.supervisionsystem.adapter.RecordFragmentAdapter;
+import cn.gdut.xietong.supervisionsystem.app.App;
 import cn.gdut.xietong.supervisionsystem.dialog.view.XListView;
 import cn.gdut.xietong.supervisionsystem.model.DuDaoLuRu;
 import cn.gdut.xietong.supervisionsystem.utils.OkHttpUtils;
@@ -33,28 +33,22 @@ import cn.gdut.xietong.supervisionsystem.utils.TimeUtil;
  */
 public class RecorderFragment extends BaseFragment implements XListView.IXListViewListener{
 
+    private final int MAX_CACHE = 5;//最大缓存数量(已经成功)
     private final int MESSAGE_JSON = 1;//设置刷新完发送消息
     private final int ROW_MAX = 20,PAGE_MIN = 1;
     private String data;
     private String TAG = "RecorderFragment";
-    private int row = 5,page = 1;
+    private int page = 1;
     private String URL = "http://10.21.71.50:8088/jeecg3.6.2/phonesurveyController.do?manager&page="+page+"&row=20";
     private XListView mListView;
-    private SimpleAdapter mAdapter1;
     private Handler mHandler;
-    private ArrayList<HashMap<String, Object>> dlist;
+    private Map<Integer,List<DuDaoLuRu>> map_LuRu;
     private String record = "record";
     private RecordFragmentAdapter mAdapter;
-    private List<DuDaoLuRu> list_book = new ArrayList<DuDaoLuRu>();
-    private boolean flag = false;
+    private List<DuDaoLuRu> list_book,list_temp;
     private myThread mThread = new myThread();
     private myHandler handler = new myHandler();
     private ProgressDialog pd;
-//    /** 初始化本地数据 */
-//    String data[] = new String[] { "姓名：吴德永1", "姓名：吴德永2", "姓名：吴德永3",
-//            "姓名：吴德永4", "姓名：吴德永5" };
-//    String data1[] = new String[] { "抚顺县救兵乡王木村", "抚顺县救兵乡王木村", "抚顺县救兵乡王木村",
-//            "抚顺县救兵乡王木村", "抚顺县救兵乡王木村" };
     @Override
     public int getLayoutId() {
         Log.i(TAG,"getLayoutId");
@@ -64,7 +58,7 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
     @Override
     protected void initViews(View mContentView) {
         /** 下拉刷新，上拉加载 */
-        dlist = new ArrayList<HashMap<String, Object>>();
+        list_book = new ArrayList<DuDaoLuRu>();
         mListView = (XListView) findViewById(R.id.listView_ListView);// 你这个listview是在这个layout里面
         mListView.setPullLoadEnable(true);// 设置让它上拉，FALSE为不让上拉，便不加载更多数据
         pd = ProgressDialog.show(getActivity(),"正在获取第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
@@ -94,13 +88,28 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
     public void onRefresh() {
         if(page > PAGE_MIN){
             page --;
-//            row = 20;
             pd = ProgressDialog.show(getActivity(),"正在切换第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
+            map_LuRu = App.getInstance().getContactList();
             mHandler.postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
-                    jsonHitoryData();
+                    if(map_LuRu.containsKey(page)){
+                        for(int i = 0 ;i < list_book.size();i++){
+                            list_book.set(i,map_LuRu.get(page).get(i));
+                        }
+                        mAdapter = new RecordFragmentAdapter(getActivity(), R.layout.fragment_record_list_item , list_book);
+                        mListView.setAdapter(mAdapter);
+                        pd.dismiss();
+                        showToast("已经缓存好了");
+                        mAdapter.notifyDataSetChanged();
+                    }else {
+                        jsonHitoryData();//添加了新数据，下面对应删除旧数据
+                        if(App.getInstance().getContactList().containsKey(page + MAX_CACHE)){
+                            App.getInstance().getContactList().remove(page + MAX_CACHE); //缓存中存在前面数据删除掉
+                        }
+                    }
+//                    jsonHitoryData();改
                     onLoad();
                 }
             }, 2000);
@@ -113,20 +122,31 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
     // 加载更多
     @Override
     public void onLoadMore() {
-//        if(row == ROW_MAX){
-            page ++;
-//            row = 5;
-            pd = ProgressDialog.show(getActivity(),"正在获取第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
-//        }else {
-//            pd = ProgressDialog.show(getActivity(),"正在获取第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
-//            row += 5;
-//            pd.show();
-//        }
+        page ++;
+        pd = ProgressDialog.show(getActivity(),"正在获取第"+((Integer)page).toString()+"页消息，请稍后","正在获取消息，请稍后");
+        map_LuRu = App.getInstance().getContactList();
         mHandler.postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                jsonHitoryData();
+                if(map_LuRu.containsKey(page)){
+                    for(int i = 0 ;i < list_book.size();i++){
+                        list_book.set(i,map_LuRu.get(page).get(i));
+                    }
+                    mAdapter = new RecordFragmentAdapter(getActivity(), R.layout.fragment_record_list_item , list_book);
+                    mListView.setAdapter(mAdapter);
+                    pd.dismiss();
+                    showToast("已经缓存好了");
+                    mAdapter.notifyDataSetChanged();
+                }else {
+                    jsonHitoryData();//添加了新数据，下面对应删除旧数据
+                    if(map_LuRu.containsKey(page - MAX_CACHE)){
+                        if(page - MAX_CACHE > 0){
+                            Log.i(TAG,"remove");
+                            map_LuRu.remove(page - MAX_CACHE); //缓存中存在前面数据删除掉
+                        }
+                    }
+                }
                 onLoad();
             }
         }, 2000);
@@ -172,7 +192,6 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
                     list_book.clear();
                 }
                 data = response.body().string();
-                Log.i(TAG,"data="+data);
                 try {
                     JSONObject myJson = new JSONObject(data);
                     JSONArray myArray = myJson.getJSONArray("edusurveylist");
@@ -267,16 +286,27 @@ public class RecorderFragment extends BaseFragment implements XListView.IXListVi
                             myBook.setCourseClassNo(data_object.getString("courseClassNo"));//学期
                         }
                         list_book.add(myBook);
-                        Log.i(TAG,"myBook="+myBook);
                     }
+//                    App.getInstance().setContactList(page,list_book);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }finally {
                     pd.dismiss();
+//                    Log.i(TAG,"appPage="+page+","+list_book);
+                    list_temp = new ArrayList<DuDaoLuRu>();//必须要new一个对象，要不然map数组的数据会全部被覆盖,改变它的数据源
+                    list_temp.addAll(list_book);
+                    App.getInstance().setContactList(page,list_temp);
                 }
                 mThread.run();
             }
         },record);
 //            mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        App.getInstance().getContactList().clear();
+//        Log.i(TAG,"onDestroy");
     }
 }
