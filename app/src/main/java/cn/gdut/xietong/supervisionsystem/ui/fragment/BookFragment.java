@@ -50,13 +50,13 @@ public class BookFragment extends BaseFragment{
     }
 
     private void initData() {
-
-        ItemListViewBean item1 = new ItemListViewBean("课程编号",duDaoBook.getId());
-        ItemListViewBean item2 = new ItemListViewBean("教室",duDaoBook.getClassroom());
-        ItemListViewBean item3 = new ItemListViewBean("日期",duDaoBook.getBookingDate().toString());
-        ItemListViewBean item4 = new ItemListViewBean("星期",duDaoBook.getWeekName());
-        ItemListViewBean item5 = new ItemListViewBean("节次",duDaoBook.getSection());
-        ItemListViewBean item6 = new ItemListViewBean("周次",String.valueOf(duDaoBook.getWeekNo()));
+//
+//        ItemListViewBean item1 = new ItemListViewBean("课程编号",duDaoBook.getId());
+//        ItemListViewBean item2 = new ItemListViewBean("教室",duDaoBook.getClassroom());
+//        ItemListViewBean item3 = new ItemListViewBean("日期",duDaoBook.getBookingDate().toString());
+//        ItemListViewBean item4 = new ItemListViewBean("星期",duDaoBook.getWeekName());
+//        ItemListViewBean item5 = new ItemListViewBean("节次",duDaoBook.getSection());
+//        ItemListViewBean item6 = new ItemListViewBean("周次",String.valueOf(duDaoBook.getWeekNo()));
 
     }
 }

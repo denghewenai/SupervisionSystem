@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    style="@style/TextAppearance.StatusBar.EventContent.Title"
     >
 
     <TextView
         android:id="@+id/id_listItem_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:paddingLeft="16dp"
+        android:layout_weight="1"
         style="@style/my_tv_message_large"
         tools:text="I am a title"
         />
 
     <TextView
         android:id="@+id/id_listItem_content"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:paddingRight="16dp"
-        style="@style/my_tv_message_middle"
+        android:layout_weight="3"
+        android:gravity="end"
+        android:textColor="@color/black"
+        style="@style/my_tv_message_small"
         tools:text="I am a tip"
          />
 
-</RelativeLayout>
+</LinearLayout>

@@ -249,8 +249,8 @@ public class OkHttpUtils {
      */
     public static String postUploadFile(Context context,String urlString, Map<String,String> map, File[] files,
                                         String[] formFileNames,Object tag) throws IOException {
-        RequestBody requestBody = null;
-        return getOkHttpUtils(context).postRequestBody(urlString,requestBody,tag);
+            RequestBody requestBody = null;
+            return getOkHttpUtils(context).postRequestBody(urlString,requestBody,tag);
     }
 
     /**

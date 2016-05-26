@@ -27,7 +27,7 @@ public class Config {
 
     //督导预约查询
     public static final String URL_ORDER_QUERY = "http://10.21.71.50:8088/jeecg3.6.2/" +
-            "SurveyBookController.do?doSearch_android&semesterSearch=%s&weekNo=%s&studentFaculty=%s&weekNameSearch=%s&sectionSearch=%s";
+            "SurveyBookController.do?doSearch_android&semesterSearch=%s&weekNo=%s&studentFaculty=%s&weekNameSearch=%s&sectionSearch=%s&schoolDistrict=1&courseName=";
 
     //督导预约
     public static final String URL_ORDER = "http://10.21.71.50:8080/jeecg3.6.2/" +

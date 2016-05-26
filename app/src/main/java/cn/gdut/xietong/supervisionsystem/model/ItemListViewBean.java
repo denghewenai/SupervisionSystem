@@ -20,16 +20,8 @@ public class ItemListViewBean {
         this.content_photoUrl = null;
     }
 
-    public ItemListViewBean(int type, String title, String content_text, String content_photoUrl) {
-        this.type = type;
-        this.title = title;
-        this.content_text = content_text;
-        this.content_photoUrl = content_photoUrl;
-        this.content_photoRes = 0;
-    }
-
-    public ItemListViewBean(String title,String content_text){
-        this(0,title,content_text,0);
+    public ItemListViewBean(int type,String title,String content_text){
+        this(type,title,content_text,0);
     }
 
     public int getType() {

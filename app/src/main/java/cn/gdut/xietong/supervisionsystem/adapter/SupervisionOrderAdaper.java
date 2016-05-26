@@ -9,7 +9,7 @@ import cn.gdut.xietong.supervisionsystem.model.ItemListViewBean;
 import cn.gdut.xietong.supervisionsystem.utils.ViewHolder;
 
 /**
- * Created by mr.deng on 2016/4/30.
+ * Created by mr.deng on 2016/4/30
  */
 public class SupervisionOrderAdaper extends CommonAdapter<ItemListViewBean>{
 
