@@ -1,71 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="4dp">
-        <TextView
-            android:paddingLeft="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="督导员:"
-            android:textSize="16sp"/>
-        <TextView
+    <TextView
             android:id="@+id/txt_DDmanager_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3114002222"
-            android:textSize="16sp"/>
-    </LinearLayout>
+            android:paddingTop="4dp"
+            android:paddingLeft="4dp"
+            tools:text="3114002222"
+            android:textColor="#666666"
+            style="@style/my_tv_message_large"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="4dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="4dp"
-            android:text="教室:"
-            android:textStyle="normal"
-            android:textSize="14sp"/>
         <TextView
             android:id="@+id/txt_DDmanager_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="教3-201"
-            android:textStyle="italic"
-            android:textSize="14sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:text="学院:"
-            android:textStyle="normal"
-            android:textSize="14sp"/>
+            tools:text="教3-201"
+            android:paddingLeft="4dp"
+            android:textStyle="bold"
+            style="@style/my_tv_message_middle"/>
         <TextView
             android:id="@+id/txt_DDmanager_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="物理与机电学院"
-            android:textStyle="italic"
-            android:textSize="14sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:text="课程时间:"
-            android:textStyle="normal"
-            android:textSize="14sp"/>
+            tools:text="物理与机电学院"
+            android:textStyle="bold"
+            style="@style/my_tv_message_middle"/>
         <TextView
             android:id="@+id/txt_DDmanager_months"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2014-06-19"
-            android:textStyle="italic"
-            android:textSize="14sp"/>
+            tools:text="2014-06-19"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textStyle="bold"
+            style="@style/my_tv_message_middle"/>
 
     </LinearLayout>
 

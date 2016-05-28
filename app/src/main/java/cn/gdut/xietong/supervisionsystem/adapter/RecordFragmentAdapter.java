@@ -48,10 +48,10 @@ public class RecordFragmentAdapter extends ArrayAdapter<DuDaoLuRu>{
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.txt_name.setText(objects.get(position).getModifyUser());
-        holder.txt_place.setText(objects.get(position).getClassroom());
-        holder.txt_studentFaculty.setText(objects.get(position).getStudentFaculty());
-        holder.txt_months.setText(objects.get(position).getDate());
+        holder.txt_name.setText("督导员:"+objects.get(position).getModifyUser());
+        holder.txt_place.setText("教室:"+objects.get(position).getClassroom());
+        holder.txt_studentFaculty.setText("学院:"+objects.get(position).getStudentFaculty());
+        holder.txt_months.setText("日期:"+objects.get(position).getDate());
         return convertView;
     }
     public final class ViewHolder{
