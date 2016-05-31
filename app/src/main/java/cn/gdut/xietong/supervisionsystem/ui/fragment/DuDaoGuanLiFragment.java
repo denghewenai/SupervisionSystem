@@ -1,11 +1,16 @@
 package cn.gdut.xietong.supervisionsystem.ui.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -32,10 +37,10 @@ import cn.gdut.xietong.supervisionsystem.utils.TimeUtil;
  */
 public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXListViewListener{
     private String TAG = "DuDaoGuanLiFragment";
-    private final int MESSAGE_JSON = 1;//设置刷新完发送消息
+    private final int MESSAGE_JSON = 1,DELETE_DUDAO = 2;//设置刷新完发送消息
     private XListView mListView;
     private Handler mHandler;
-    private String URL = Config.URL_MANAGE_ORDER;
+    private String URL = Config.URL_MANAGE_ORDER,URL_DELETE = Config.URL_DELETE_ORDER;
     private String super_tag = "test";
     private List<DuDaoBook> list_book;
     private ManagerAdapter myAdapter;
@@ -43,6 +48,8 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
     private myThread mThread = new myThread();
     private myHandler handler = new myHandler();
     private ProgressDialog pd;
+    private int delete_flag = 0;
+    private List<DuDaoBook> list_delete = new ArrayList<DuDaoBook>();
     @Override
     public int getLayoutId() {
         return R.layout.fragment_news;
@@ -59,8 +66,19 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 //        mListView.setAdapter(myAdapter);
         mListView.setXListViewListener(this);
         mHandler = new Handler();
+        initOnclickListner();
     }
 
+    private void initOnclickListner(){
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                DuDaoBook delete_book = myAdapter.getItem(position - 1);
+                showDeleDialog(getActivity(),delete_book);
+                return false;
+            }
+        });
+    }
     @Override
     public void initEvents(Bundle savedInstanceState) {
 
@@ -74,9 +92,7 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
 
             @Override
             public void run() {
-                jsonHitoryData();
-//                myAdapter.notifyDataSetChanged();
-//                mListView.setAdapter(myAdapter);
+                jsonHitoryData();//更改数据源
                 onLoad();
             }
         }, 2000);
@@ -112,6 +128,15 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
             handler.sendMessage(msg);
         }
     }
+    class deteleThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            Message msg = Message.obtain();
+            msg.what = DELETE_DUDAO;
+            handler.sendMessage(msg);
+        }
+    }
     class myHandler extends Handler{
         @Override
         public void handleMessage(Message msg) {
@@ -124,6 +149,11 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
                 }else {
                     myAdapter.notifyDataSetChanged();
                 }
+            }
+            if(msg.what == DELETE_DUDAO){
+                myAdapter.remove(list_delete.get(0));
+                list_delete.clear();
+                myAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -172,5 +202,55 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
             }
         },super_tag);
         return list_book;
+    }
+
+    /**
+     *
+     * @param context 上下文内容
+     * @param delet_book 要删除的数据
+     */
+    private void showDeleDialog(final Context context, final DuDaoBook delet_book){
+        list_delete.add(delet_book);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context); //实例化一个AlterDialog对象
+        dialog.setIcon(R.drawable.icon_help);
+        dialog.setTitle("督导管理");                                       //设置弹出窗口的主题
+        dialog.setMessage("确定要删除该"+delet_book.getTeacherName()+"老师的预约督导记录吗？");                                //设置弹出窗口的内容
+        dialog.setCancelable(false);                                             //设置为false时候不能通过Back键取消掉窗口
+        dialog.setPositiveButton("删除", new DialogInterface.OnClickListener() {     //监听点击OK键会发生什么
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                OkHttpUtils.getDataAsync(getActivity(), URL_DELETE + "&ids=" + delet_book.getId(), new Callback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+                        Log.i(TAG,"request_failure="+request);
+                    }
+
+                    @Override
+                    public void onResponse(Response response) throws IOException {
+                        String data = response.body().string();
+                        Log.i(TAG,"data_delete="+data);
+                        try {
+                            JSONObject object_delete = new JSONObject(data);
+                            delete_flag = object_delete.getInt("status");
+                            if(delete_flag == 1){//删除成功
+                                new deteleThread().run();
+                            }else {
+                                Toast.makeText(getActivity(),"删除失败",Toast.LENGTH_SHORT).show();
+                            }
+                            Log.i(TAG,"flag="+delete_flag);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, "delete_id");
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {    //监听点击Cancel会发生什么
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

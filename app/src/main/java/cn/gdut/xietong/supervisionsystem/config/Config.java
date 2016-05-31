@@ -22,7 +22,7 @@ public class Config {
             "eduSurveybookingController.do?doUpdate_android";
 
     //取消预约
-    public static final String URL_DELETE_ORDER = "http://10.21.71.50:8080/jeecg3.6.2/" +
+    public static final String URL_DELETE_ORDER = "http://10.21.71.50:8088/jeecg3.6.2/" +
             "eduSurveybookingController.do?doBatchDel_android";
 
     //督导预约查询
