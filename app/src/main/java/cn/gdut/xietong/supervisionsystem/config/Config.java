@@ -1,7 +1,7 @@
 package cn.gdut.xietong.supervisionsystem.config;
 
 /**
- * Created by mr.deng on 2016/1/21.
+ * Created by mr.deng on 2016/1/21
  */
 public class Config {
 
@@ -18,7 +18,7 @@ public class Config {
             "eduSurveybooking_android";
 
     //督导预约录入
-    public static final String URL_ORDER_INPUT = "http://10.21.71.114:8080/jeecg3.6.2/" +
+    public static final String URL_ORDER_INPUT = "http://10.21.71.114:8088/jeecg3.6.2/" +
             "eduSurveybookingController.do?doUpdate_android";
 
     //取消预约
@@ -30,7 +30,7 @@ public class Config {
             "SurveyBookController.do?doSearch_android&semesterSearch=%s&weekNo=%s&studentFaculty=%s&weekNameSearch=%s&sectionSearch=%s&schoolDistrict=1&courseName=";
 
     //督导预约
-    public static final String URL_ORDER = "http://10.21.71.50:8080/jeecg3.6.2/" +
+    public static final String URL_ORDER = "http://10.21.71.50:8088/jeecg3.6.2/" +
             "SurveyBookController.do?doUpdate_android";
 
     //管理员督导管理

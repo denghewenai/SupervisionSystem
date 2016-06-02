@@ -27,15 +27,20 @@ import java.util.List;
 import cn.gdut.xietong.supervisionsystem.R;
 import cn.gdut.xietong.supervisionsystem.adapter.ManagerAdapter;
 import cn.gdut.xietong.supervisionsystem.config.Config;
+import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentCallback;
+import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentCallbackProvider;
+import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentInterface;
+import cn.gdut.xietong.supervisionsystem.dialog.interfaces.SimpleDialogFragmentCallback;
 import cn.gdut.xietong.supervisionsystem.dialog.view.XListView;
 import cn.gdut.xietong.supervisionsystem.model.DuDaoBook;
+import cn.gdut.xietong.supervisionsystem.utils.DialogManager;
 import cn.gdut.xietong.supervisionsystem.utils.OkHttpUtils;
 import cn.gdut.xietong.supervisionsystem.utils.TimeUtil;
 
 /**
  * Created by Administrator on 2016/1/19.
  */
-public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXListViewListener{
+public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXListViewListener,DialogFragmentCallbackProvider{
     private String TAG = "DuDaoGuanLiFragment";
     private final int MESSAGE_JSON = 1,DELETE_DUDAO = 2;//设置刷新完发送消息
     private XListView mListView;
@@ -43,6 +48,7 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
     private String URL = Config.URL_MANAGE_ORDER,URL_DELETE = Config.URL_DELETE_ORDER;
     private String super_tag = "test";
     private List<DuDaoBook> list_book;
+    private DuDaoBook delete_book;
     private ManagerAdapter myAdapter;
     private int Number = 5;
     private myThread mThread = new myThread();
@@ -73,8 +79,11 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                DuDaoBook delete_book = myAdapter.getItem(position - 1);
-                showDeleDialog(getActivity(),delete_book);
+                delete_book = myAdapter.getItem(position - 1);
+                list_delete.add(delete_book);
+                new DialogManager(getActivity()).showAlertDialog(DuDaoGuanLiFragment.this,getChildFragmentManager(),
+                        "确定要删除该"+delete_book.getTeacherName()+"老师的预约督导记录吗？");
+//                showDeleDialog(getActivity(),delete_book);
                 return false;
             }
         });
@@ -119,6 +128,45 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
         }, 2000);
         Log.i(TAG,"onLoadMore");
     }
+
+    @Override
+    public DialogFragmentCallback getDialogFragmentCallback() {
+        return new SimpleDialogFragmentCallback(){
+            @Override
+            public void onClickNegative(DialogFragmentInterface dialog) {
+                //取消后回调
+                list_delete.clear();
+            }
+
+            @Override
+            public void onClickPositive(DialogFragmentInterface dialog) {
+                OkHttpUtils.getDataAsync(getActivity(), URL_DELETE + "&ids=" + delete_book.getId(), new Callback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+                        Log.i(TAG,"request_failure="+request);
+                    }
+
+                    @Override
+                    public void onResponse(Response response) throws IOException {
+                        String data = response.body().string();
+                        Log.i(TAG,"data_delete="+data);
+                        try {
+                            JSONObject object_delete = new JSONObject(data);
+                            delete_flag = object_delete.getInt("status");
+                            if(delete_flag == 1){//删除成功
+                                new deteleThread().run();
+                            }else {
+                                Toast.makeText(getActivity(),"删除失败",Toast.LENGTH_SHORT).show();
+                            }
+                            Log.i(TAG,"flag="+delete_flag);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, "delete_id");            }
+        };
+    }
+
     class myThread extends Thread{
         @Override
         public void run() {
@@ -189,7 +237,7 @@ public class DuDaoGuanLiFragment extends BaseFragment implements XListView.IXLis
                         String Booking_date = TimeUtil.longToString(Long.parseLong(data_object.getString("date")) , "yyyy-MM-dd");
                         Log.i(TAG,"Booking_date="+Booking_date);
                         myBook.setBookingDate(Booking_date);//预约日期
-                        myBook.setWeekNo(Integer.parseInt(data_object.getString("weekNo")));//查询：周次
+                        myBook.setWeekNo(data_object.getString("weekNo"));//查询：周次
                         myBook.setCommenceDept(data_object.getString("studentFaculty"));//学院名称
                         list_book.add(myBook);
                     }

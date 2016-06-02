@@ -20,7 +20,7 @@ public class DuDaoBook {
     //节次
     private String section;
     //查询：周次
-    private int weekNo;
+    private String weekNo;
     //查询：学期
     private String semesterSearch;
     //查询：星期
@@ -99,11 +99,11 @@ public class DuDaoBook {
         this.section = section;
     }
 
-    public int getWeekNo() {
+    public String getWeekNo() {
         return weekNo;
     }
 
-    public void setWeekNo(int weekNo) {
+    public void setWeekNo(String weekNo) {
         this.weekNo = weekNo;
     }
 

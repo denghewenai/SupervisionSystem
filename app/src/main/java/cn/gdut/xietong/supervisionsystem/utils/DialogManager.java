@@ -83,8 +83,11 @@ public class DialogManager {
     }
 
     public void showAlertDialog(DialogFragmentCallbackProvider provider, FragmentManager fragmentManager,String message){
-        new AlertDialogFragment.Builder(mContext).setIcon(R.mipmap.ic_launcher)
+        new AlertDialogFragment.Builder(mContext,R.style.CustomDialog)
+                .setIcon(R.mipmap.ic_launcher)
                 .setMessage(message)
+                .setPositiveButton("确认",provider)
+                .setNegativeButton("取消",provider)
                 .show(fragmentManager, "SingleChoiceDialog");
     }
 }

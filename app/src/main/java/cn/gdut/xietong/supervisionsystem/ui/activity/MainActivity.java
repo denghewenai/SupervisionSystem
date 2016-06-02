@@ -12,14 +12,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 import cn.gdut.xietong.supervisionsystem.R;
-import cn.gdut.xietong.supervisionsystem.ui.fragment.HomeFragment;
 import cn.gdut.xietong.supervisionsystem.ui.fragment.DuDaoGuanLiFragment;
+import cn.gdut.xietong.supervisionsystem.ui.fragment.HomeFragment;
 import cn.gdut.xietong.supervisionsystem.ui.fragment.QueryFragment;
 
 public class MainActivity extends BaseActivity {
@@ -199,11 +200,19 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(mDrawerLayout.isDrawerOpen(Gravity.LEFT)){
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-            return ;
+            return true;
         }
-        super.onBackPressed();
+        boolean soved = false;
+        if(nowFragment instanceof QueryFragment){
+            QueryFragment fragment = (QueryFragment) nowFragment;
+            soved = fragment.onKeyDown(keyCode);
+            if(soved){
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

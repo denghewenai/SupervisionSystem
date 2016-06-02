@@ -217,6 +217,7 @@ public class OkHttpUtils {
         FormEncodingBuilder builder = new FormEncodingBuilder();
         if(map != null && !map.isEmpty()){
             for (Map.Entry<String,String> entry:map.entrySet()){
+                Log.i("info",entry.getKey()+entry.getValue());
                 builder.add(entry.getKey(),entry.getValue());
             }
         }

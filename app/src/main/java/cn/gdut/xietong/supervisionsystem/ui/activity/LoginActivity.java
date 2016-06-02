@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,7 +54,6 @@ public class LoginActivity extends BaseActivity{
         username = (String) SPUtils.get(LoginActivity.this,"username","admin");
         password = (String) SPUtils.get(LoginActivity.this,"password","password");
 
-        Log.i("info",username+"username"+ password + "password");
         if(!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password) ){
             et_username.setText(username);
             et_password.setText(password);
@@ -86,8 +84,6 @@ public class LoginActivity extends BaseActivity{
 
         final String urlString = String.format(Config.URL_LOGIN,username,password);
 
-        Log.i("info",urlString);
-
         if(TextUtils.isEmpty(username)){
             showToast("用户名不能为空");
             return;
@@ -103,12 +99,10 @@ public class LoginActivity extends BaseActivity{
         OkHttpUtils.getDataAsync(LoginActivity.this,urlString, new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Log.i("info","onFailure");
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         pd.dismiss();
-                        et_username.setText("");
                         et_password.setText("");
                         showToast("登陆失败,请重试");
                     }
@@ -117,9 +111,7 @@ public class LoginActivity extends BaseActivity{
 
             @Override
             public void onResponse(Response response) throws IOException {
-                Log.i("info","onResponse"+response);
                 String result = response.body().string();
-                Log.i("info",result);
                 if(result.contains("1")) {
                     handler.post(new Runnable() {
                         @Override

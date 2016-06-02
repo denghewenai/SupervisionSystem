@@ -10,13 +10,16 @@
     <ViewSwitcher
         android:id="@+id/id_viewSwitcher"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:layout_marginTop="72dp"
         android:layout_gravity="center"
         >
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             carc_view:cardBackgroundColor="@color/material_blue_100"
@@ -116,7 +119,8 @@
         <FrameLayout
             android:id="@+id/id_fragmentLayout"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:clipChildren="false"
             >
             <android.support.v4.view.ViewPager
@@ -128,23 +132,27 @@
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
                 android:elevation="10dp"
-                android:background="@color/material_blue_100"/>
+                android:background="@drawable/circular_bg"/>
         </FrameLayout>
 
-
-
     </ViewSwitcher>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="2">
 
         <Button
             android:id="@+id/id_btn_submit"
             android:layout_width="88dp"
             android:layout_height="46dp"
-            android:layout_margin="8dp"
+            android:layout_gravity="center"
             android:background="@drawable/flat_btn_bg"
             android:text="提交记录"
             android:textColor="#ffffff"
             android:textSize="16sp"/>
 
-
+    </FrameLayout>
 
 </LinearLayout>

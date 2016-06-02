@@ -2,10 +2,10 @@ package cn.gdut.xietong.supervisionsystem.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +24,9 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.gdut.xietong.supervisionsystem.R;
 import cn.gdut.xietong.supervisionsystem.adapter.CommonAdapter;
@@ -33,6 +35,7 @@ import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentCallbac
 import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentCallbackProvider;
 import cn.gdut.xietong.supervisionsystem.dialog.interfaces.DialogFragmentInterface;
 import cn.gdut.xietong.supervisionsystem.dialog.interfaces.SimpleDialogFragmentCallback;
+import cn.gdut.xietong.supervisionsystem.dialog.material.ProgressDialogFragment;
 import cn.gdut.xietong.supervisionsystem.dialog.view.StringPicker;
 import cn.gdut.xietong.supervisionsystem.model.DuDaoBook;
 import cn.gdut.xietong.supervisionsystem.model.ItemListViewBean;
@@ -56,14 +59,13 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
 
     private ViewSwitcher viewSwitcher;
     private ViewPager viewPager;
-    private List<Fragment> mFragments;
     private View frameLayout;
 
     private Handler mHandler = new Handler();
-    public static SurveyBookResult mBookResult;
+    private   SurveyBookResult mBookResult;
 
     private String mString;
-    private String[] datas = new String[5];
+    private String[] data = new String[5];
     private DialogManager dialogManager;
 
     @Override
@@ -86,13 +88,6 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
         viewPager = (ViewPager) findViewById(R.id.id_viewPager);
         frameLayout = findViewById(R.id.id_fragmentLayout);
 
-        //一共ViewPager里面维持着三个Fragment,当一个滑动时左右两边均滑动
-        mFragments = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            Fragment mTab = new BookFragment();
-            mFragments.add(mTab);
-        }
-
     }
 
     @Override
@@ -112,6 +107,7 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
                 return viewPager.dispatchTouchEvent(event);
             }
         });
+
     }
 
     @Override
@@ -125,7 +121,7 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
                 if (btn.getText().equals("提交记录")) {
                     submit();
                 } else if (btn.getText().equals("督导预约")) {
-
+                    subscribe();
                 }
                 break;
             case R.id.id_row1:
@@ -153,9 +149,20 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
      */
     private void submit() {
 
-        OkHttpUtils.getDataAsync(getActivity(), String.format(Config.URL_ORDER_QUERY, datas), new Callback() {
+        final ProgressDialogFragment dialogFragment = ProgressDialogFragment.newInstance(this,R.style.CustomDialog);
+        dialogFragment.setMessage("正在查询…");
+        dialogFragment.show(getChildFragmentManager(),"tag");
+
+        OkHttpUtils.getDataAsync(getActivity(), String.format(Config.URL_ORDER_QUERY, (Object[]) data), new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialogFragment.dismiss();
+                        showToast("查询失败");
+                    }
+                });
             }
 
             @Override
@@ -165,18 +172,17 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
                     mBookResult = gson.fromJson(response.body().string(), SurveyBookResult.class);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.i("info", e.toString());
                 }
-                Log.i("info", mBookResult.getSurveyBookList().get(0).toString() + "mBookResult");
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
+                        dialogFragment.dismiss();
                         if (mBookResult != null && mBookResult.getStatus() == 1)
                             if (mBookResult.getSurveyBookList() != null && !mBookResult.getSurveyBookList().isEmpty()) {
                                 viewSwitcher.showNext();
                                 btn.setText("督导预约");
                                 //设置page间间距
-                                viewPager.setPageMargin(30);
+                                viewPager.setPageMargin(20);
                                 //设置最大缓存的页面数目
                                 viewPager.setOffscreenPageLimit(3);
                                 viewPager.setPageTransformer(false,new AlphaPageTransformer());
@@ -234,6 +240,51 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
 
     }
 
+    /**
+     * 确认督导
+     */
+    private void subscribe() {
+        DuDaoBook nowSelect = mBookResult.getSurveyBookList().get(viewPager.getCurrentItem());
+
+        //Post请求的键值对
+        Map<String,String> map = new HashMap<>();
+        map.put("id",nowSelect.getId());
+        map.put("classroom",nowSelect.getClassroom());
+        map.put("semester",nowSelect.getSemester());
+        map.put("weekName",nowSelect.getWeekName());
+        map.put("section",nowSelect.getSection());
+        map.put("weekNo", data[1] + "");
+
+        OkHttpUtils.postKeyValuePairAsync(getActivity(), Config.URL_ORDER, map, new Callback() {
+            @Override
+            public void onFailure(Request request, final IOException e) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        showToast(e.toString());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse( Response response) throws IOException {
+                final String result = response.body().string();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                            showToast(result);
+                    }
+                });
+            }
+        },"subscribe");
+    }
+
+    /**
+     * 初始化List中的数据
+     * @param duDaoBook 查询的结果
+     * @param type 布局类型
+     * @return 一个List要显示的内容
+     */
     private List<ItemListViewBean> initDatas(DuDaoBook duDaoBook, int type) {
         List<ItemListViewBean> datas = new ArrayList<>();
         ItemListViewBean item1 = new ItemListViewBean(type, "课程编号:", duDaoBook.getId());
@@ -265,7 +316,7 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
                 } else {
                     mString = year - 1 + "-" + year + "-2";
                 }
-                datas[0] = mString;
+                data[0] = mString;
                 mTableRow1.setText(year + "-" + (month + 1) + "-" + day);
             }
 
@@ -281,26 +332,31 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
         };
     }
 
+    /**
+     * 判断为哪一个ET设置数据
+     * @param dialog 对话框
+     * @throws UnsupportedEncodingException
+     */
     private void setTextWitch(DialogFragmentInterface dialog) throws UnsupportedEncodingException {
         switch (dialog.getTag()) {
             case 1 + "":
-                datas[1] = new String(mString.getBytes(), "utf-8");
+                data[1] = new String(mString.getBytes(), "utf-8");
                 mTableRow1.setText(mString);
                 break;
             case 2 + "":
-                datas[1] = String.valueOf(mString.charAt(1));
+                data[1] = String.valueOf(mString.charAt(1));
                 mTableRow2.setText(mString);
                 break;
             case 3 + "":
-                datas[2] = mString;
+                data[2] = mString;
                 mTableRow3.setText(mString);
                 break;
             case 4 + "":
-                datas[3] = mString;
+                data[3] = mString;
                 mTableRow4.setText(mString);
                 break;
             case 5 + "":
-                datas[4] = mString;
+                data[4] = mString;
                 mTableRow5.setText(mString);
                 break;
             default:
@@ -308,32 +364,68 @@ public class QueryFragment extends BaseFragment implements View.OnClickListener,
         }
     }
 
-    class AlphaPageTransformer implements ViewPager.PageTransformer{
-        private static final float DEFAULT_MIN_ALPHA = 0.3f;
+    /**
+     * ViewPager切换时根据位置不同显示不同的透明度
+     */
+    private class AlphaPageTransformer implements ViewPager.PageTransformer{
+        private static final float DEFAULT_MIN_ALPHA = 0.5f;
+        private static final float MIN_SCALE = 0.85f;
         private float mMinAlpha = DEFAULT_MIN_ALPHA;
 
         @Override
         public void transformPage(View view, float position) {
 
+            int pageWidth = view.getWidth();
+            int pageHeight = view.getHeight();
+            Log.i("info","position="+position+"view="+viewPager.getCurrentItem());
+
             if(position < -1){
                 view.setAlpha(mMinAlpha);
+                view.setScaleY(MIN_SCALE);
+                view.setScaleX(MIN_SCALE);
             }else if(position <= 1){
+                //缩放因数
+                float scaleFactor = Math.max(MIN_SCALE,1 - Math.abs(position));
+                //缩放时View减少的边距
+                float horMargin = pageWidth * (1 - scaleFactor) / 2;
+                float verMargin = pageHeight * (1 - scaleFactor)/2;
 
                 if(position < 0){
                     //计算滑动过程中透明度的变换
                     float factor = mMinAlpha + (1 - mMinAlpha) * (1 + position);
                     view.setAlpha(factor);
+                    view.setTranslationX(horMargin - verMargin / 2);
                 }else {
                     float factor = mMinAlpha + (1 - mMinAlpha) * (1 - position);
                     view.setAlpha(factor);
+                    //向左滑应该向左动，补上由于View缩小造成的间距
+                    view.setTranslationX(-horMargin + verMargin / 2);
                 }
+
+                view.setScaleX(scaleFactor);
+                view.setScaleY(scaleFactor);
 
             }else{
                 view.setAlpha(mMinAlpha);
+                view.setScaleY(MIN_SCALE);
+                view.setScaleX(MIN_SCALE);
             }
 
         }
 
+    }
+
+    /**
+     * 接收返回按钮点击事件
+     * @param keyCode 按键编码
+     * @return 是否处理这个返回事件
+     */
+    public boolean onKeyDown(int keyCode){
+        if(keyCode == KeyEvent.KEYCODE_BACK && viewSwitcher.getCurrentView().getId() == R.id.id_fragmentLayout){
+            viewSwitcher.showPrevious();
+            return true;
+        }
+        return false;
     }
 
 }
