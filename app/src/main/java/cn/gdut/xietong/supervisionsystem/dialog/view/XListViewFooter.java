@@ -23,6 +23,7 @@ public class XListViewFooter extends LinearLayout {
     private View mContentView;
     private View mProgressBar;
     private TextView mHintView;
+    private View mLinearLayout;
 
     public XListViewFooter(Context context) {
         super(context);
@@ -36,13 +37,15 @@ public class XListViewFooter extends LinearLayout {
 
     public void setState(int state) {
         mHintView.setVisibility(View.INVISIBLE);// 开始底部控件都隐藏
-        mProgressBar.setVisibility(View.INVISIBLE);
+//        mProgressBar.setVisibility(View.INVISIBLE); 改2016.6.3
+        mLinearLayout.setVisibility(View.INVISIBLE);
         mHintView.setVisibility(View.INVISIBLE);
         if (state == STATE_READY) {// 如果是第一页状态，那么“查看更多”显示
             mHintView.setVisibility(View.VISIBLE);
             mHintView.setText("松开显示更多");// 松开显示更多
         } else if (state == STATE_LOADING) {// 当加载的时候
-            mProgressBar.setVisibility(View.VISIBLE);// 加载进度条显示
+//            mProgressBar.setVisibility(View.VISIBLE);// 加载进度条显示   //改2016.6.3
+            mLinearLayout.setVisibility(View.VISIBLE);
         } else {
             mHintView.setVisibility(View.VISIBLE);
             mHintView.setText("查看更多");// 查看更多
@@ -110,6 +113,7 @@ public class XListViewFooter extends LinearLayout {
 
         mContentView = moreView.findViewById(R.id.xlistview_footer_content);
         mProgressBar = moreView.findViewById(R.id.xlistview_footer_progressbar);
+        mLinearLayout = moreView.findViewById(R.id.xlistview_footer_linear);
         mHintView = (TextView) moreView
                 .findViewById(R.id.xlistview_footer_hint_textview);
     }
